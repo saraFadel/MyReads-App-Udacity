@@ -6,7 +6,7 @@
 * I used Udacity APIs for retrieving the books also the backend was provided from Udacity as a starter code. 
 
  
-## Technolgies in this app:
+## Technologies in this app:
 
 * Node js 
 * React 
