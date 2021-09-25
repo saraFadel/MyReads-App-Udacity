@@ -18,7 +18,7 @@ class SearchBook extends Component {
   //TODO: Use query to search books by calling the search API
   updateQuery= (query) => {
     this.setState(() => ({
-      query: query.trim()
+      query: query
     }), this.props.searchBooks(query));
 
   }
