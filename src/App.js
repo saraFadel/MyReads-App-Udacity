@@ -62,16 +62,17 @@ class BooksApp extends Component {
             this.setState({searchedBooks: []})
           }else{
             this.setState((currentState) => ({
+              //Loop over the result to update book's select value
               searchedBooks: result.map((bookSearch) => {
+
                 let shelfCheck = currentState.books.filter((bookList) =>
                 bookList.id === bookSearch.id);
 
                 bookSearch.shelf= shelfCheck[0]? shelfCheck[0].shelf :'none';
-                /*console.log(`Search: ${bookSearch.shelf} - Books: ${JSON.stringify(currentState.books.filter((bookList) =>
-                bookList.id === bookSearch.id))}`);*/
+
                 return bookSearch;
             })
-            }))
+          }))
           }
         }
       });
@@ -97,7 +98,6 @@ class BooksApp extends Component {
             searchBooks= {this.searchBooks}
             updateList= {this.updateList}/>
           )}/>
-          //{console.log(this.state.searchedBooks)}
         </div>
       )
     }else{

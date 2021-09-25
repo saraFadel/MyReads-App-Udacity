@@ -63,7 +63,6 @@ class SearchBook extends Component {
                   :(searchedBooks.length !== 0
                     //case2: User write a valid query
                     ?searchedBooks.map((book) => {
-                      //console.log(`From search: ${book.shelf}`);
                       return(
                         <li key= {book.id}>
                           <Book book= {book}

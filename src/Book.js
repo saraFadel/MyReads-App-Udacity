@@ -33,7 +33,7 @@ class Book extends Component {
                 :"http://books.google.com/books/content?id=1yx1tgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"})` }}></div>
             <div className="book-shelf-changer">
 
-              <select value= {shelf}
+              <select value= {book.shelf}
                  onChange= {(event) => this.handleChange(event.target.value)}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
@@ -41,7 +41,6 @@ class Book extends Component {
                 <option value="read">Read</option>
                 <option value="none">None</option>
               </select>
-
             </div>
           </div>
           <div className="book-title">{book.title}</div>
