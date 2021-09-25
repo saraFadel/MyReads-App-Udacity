@@ -9,7 +9,6 @@ class SearchBook extends Component {
     searchedBooks: PropTypes.array.isRequired,
     searchBooks: PropTypes.func.isRequired,
     updateList: PropTypes.func.isRequired,
-    shelfsStatus: PropTypes.object.isRequired,
   }
 
   state= {
@@ -31,7 +30,7 @@ class SearchBook extends Component {
 
   render(){
     const {query}= this.state;
-    const {searchedBooks, shelfsStatus}= this.props;
+    const {searchedBooks}= this.props;
 
     return(
       <div className="search-books">
@@ -64,11 +63,11 @@ class SearchBook extends Component {
                   :(searchedBooks.length !== 0
                     //case2: User write a valid query
                     ?searchedBooks.map((book) => {
+                      //console.log(`From search: ${book.shelf}`);
                       return(
                         <li key= {book.id}>
                           <Book book= {book}
-                          updateList= {this.props.updateList}
-                          shelfsStatus= {shelfsStatus}/>
+                          updateList= {this.props.updateList}/>
                         </li>
                       )})
                       //case3: User write an invalid query

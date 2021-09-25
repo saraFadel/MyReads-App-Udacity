@@ -12,8 +12,6 @@ class BooksApp extends Component {
       books: [],
       //Keep the result of query's search
       searchedBooks: [],
-      //Keep the result of update book's shelf
-      shelfsStatus: {},
     };
   }
   //TODO: Call the getAll API once the app is opened
@@ -27,12 +25,11 @@ class BooksApp extends Component {
   }
 
   //TODO: Update books select value depending in user chosen(state)
-  updateList = (newShelf, book, shelf) => {
+  updateList = (newShelf, book) => {
     if(book.shelf !== newShelf){
       BooksAPI.update(book, newShelf)
-      .then((shelfsStatus) => {
+      .then(() => {
         this.setState((currentState) => ({
-          shelfsStatus: shelfsStatus,
           books: currentState.books.map((b) => {
             if(book.id === b.id){
               b.shelf= newShelf;
@@ -40,7 +37,7 @@ class BooksApp extends Component {
             return b;
           })
         }))
-        console.log(this.state.shelfsStatus);
+        //console.log(this.state.shelfsStatus);
         BooksAPI.getAll()
         .then((books) => {
           this.setState(() => ({
@@ -64,8 +61,16 @@ class BooksApp extends Component {
           if(result.error === "empty query"){
             this.setState({searchedBooks: []})
           }else{
-            this.setState(() => ({
-              searchedBooks: result
+            this.setState((currentState) => ({
+              searchedBooks: result.map((bookSearch) => {
+                let shelfCheck = currentState.books.filter((bookList) =>
+                bookList.id === bookSearch.id);
+
+                bookSearch.shelf= shelfCheck[0]? shelfCheck[0].shelf :'none';
+                /*console.log(`Search: ${bookSearch.shelf} - Books: ${JSON.stringify(currentState.books.filter((bookList) =>
+                bookList.id === bookSearch.id))}`);*/
+                return bookSearch;
+            })
             }))
           }
         }
@@ -77,6 +82,7 @@ class BooksApp extends Component {
     //Handle if the API is broken or no internet
     if(this.state.books){
       return (
+
         <div className="app">
           {/*TODO: Route :)*/}
           <Route exact path= '/' render= {() => (
@@ -89,9 +95,9 @@ class BooksApp extends Component {
             <SearchBook
             searchedBooks= {this.state.searchedBooks}
             searchBooks= {this.searchBooks}
-            updateList= {this.updateList}
-            shelfsStatus= {this.state.shelfsStatus}/>
+            updateList= {this.updateList}/>
           )}/>
+          //{console.log(this.state.searchedBooks)}
         </div>
       )
     }else{
@@ -102,7 +108,6 @@ class BooksApp extends Component {
         </div>
       )
     }
-
   }
 }
 
