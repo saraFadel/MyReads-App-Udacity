@@ -1,8 +1,16 @@
 # MyReads Project
 
-This is the my submission for Udacity's MyRead App.
+* This is the my submission for Udacity's MyRead App.
+* The app consists of 2 page; the first one shows 3 shelfs that contains books according to the status of reading.
+* The 2nd page is for searching for books.
+* I used Udacity APIs for retrieving the books also the backend was provided from Udacity as a starter code. 
 
  
+## Technolgies in this app:
+
+* Node js 
+* React 
+
 
 ## To get started developing right away:
 
